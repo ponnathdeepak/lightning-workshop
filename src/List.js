@@ -1,6 +1,5 @@
 import { List } from "@lightningjs/ui";
 import { Lightning, Utils } from "@lightningjs/sdk";
-import data from "./../static/api/CONTENTLISTINGPAGE-PAGE1.json";
 import Api from "./Api";
 import Component from "./Component";
 export default class ListComponent extends Lightning.Component {
@@ -51,18 +50,13 @@ export default class ListComponent extends Lightning.Component {
       },
     };
   }
-  // async _getMovies(){
-  //     return fetch("./../static/api/CONTENTLISTINGPAGE-PAGE1.json").then((response)=>{
-  //         return response.json();
-  //     })
-  // }
+
   _init() {
     this.pageFetched = 0;
     this.totalCount = 0;
 
     Api._getMovies().then((movieList) => {
       this.tag("Category").text = movieList.page.title;
-      console.log(movieList);
       this.totalCount = Number(movieList["page"]["total-content-items"]);
       this.pageFetched = 1;
       this.tag("List").items = movieList["page"]["content-items"][
@@ -79,9 +73,10 @@ export default class ListComponent extends Lightning.Component {
     });
   }
   $focusedTile(item) {
-    console.log(item);
     this.tag("HightlightedTitle").text = item.name;
-    this.tag("HightlightedDescription").text = item.description;
+    this.tag("HightlightedDescription").text = item.description
+      ? item.description
+      : "Content description not available ";
     if (
       this.tag("List").index === this.tag("List").length - 1 &&
       this.tag("List").length < this.totalCount
@@ -92,7 +87,6 @@ export default class ListComponent extends Lightning.Component {
   fetchNext() {
     Api._getMovies(this.pageFetched + 1).then((movieList) => {
       this.tag("Category").text = movieList.page.title;
-      console.log(movieList);
       this.totalCount = Number(movieList["page"]["total-content-items"]);
       this.pageFetched += 1;
       this.tag("List").add(
