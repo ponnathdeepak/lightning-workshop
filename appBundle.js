@@ -3,7 +3,7 @@
  * SDK version: 5.3.2
  * CLI version: 2.11.0
  * 
- * Generated: Fri, 12 May 2023 19:09:29 GMT
+ * Generated: Sat, 13 May 2023 15:19:12 GMT
  */
 
 var APP_com_domain_app_lightningworkshop = (function () {
@@ -9042,7 +9042,7 @@ var APP_com_domain_app_lightningworkshop = (function () {
           x: 0,
           text: {
             text: "08:5",
-            fontFace: 'Regular',
+            fontFace: "Regular",
             fontSize: 32,
             textColor: 0xbb747474,
             wordWrapWidth: 180
@@ -9051,21 +9051,16 @@ var APP_com_domain_app_lightningworkshop = (function () {
       };
     }
     set item(item) {
-      console.log(item);
       this.movieItem = item;
-      this.tag('Name').text = item.name;
-      if (Utils.asset("images/".concat(item['poster-image']))) {
-        this.tag('Thumbnail').src = Utils.asset("images/".concat(item['poster-image']));
-      } else {
-        this.tag('Thumbnail').src = Utils.asset("images/placeholder_for_missing_posters.png");
-      }
+      this.tag("Name").text = item.name;
+      this.tag("Thumbnail").src = item["poster-image"] == "posterthatismissing.jpg" ? Utils.asset("images/placeholder_for_missing_posters.png") : Utils.asset("images/".concat(item["poster-image"]));
     }
     _focus() {
-      this.tag('Border').visible = true;
-      this.fireAncestors('$focusedTile', this.movieItem);
+      this.tag("Border").visible = true;
+      this.fireAncestors("$focusedTile", this.movieItem);
     }
     _unfocus() {
-      this.tag('Border').visible = false;
+      this.tag("Border").visible = false;
     }
   }
 
@@ -9117,17 +9112,11 @@ var APP_com_domain_app_lightningworkshop = (function () {
         }
       };
     }
-    // async _getMovies(){
-    //     return fetch("./../static/api/CONTENTLISTINGPAGE-PAGE1.json").then((response)=>{
-    //         return response.json();
-    //     })
-    // }
     _init() {
       this.pageFetched = 0;
       this.totalCount = 0;
       Api._getMovies().then(movieList => {
         this.tag("Category").text = movieList.page.title;
-        console.log(movieList);
         this.totalCount = Number(movieList["page"]["total-content-items"]);
         this.pageFetched = 1;
         this.tag("List").items = movieList["page"]["content-items"]["content"].map(item => {
@@ -9142,9 +9131,8 @@ var APP_com_domain_app_lightningworkshop = (function () {
       });
     }
     $focusedTile(item) {
-      console.log(item);
       this.tag("HightlightedTitle").text = item.name;
-      this.tag("HightlightedDescription").text = item.description;
+      this.tag("HightlightedDescription").text = item.description ? item.description : "Content description not available ";
       if (this.tag("List").index === this.tag("List").length - 1 && this.tag("List").length < this.totalCount) {
         this.fetchNext();
       }
@@ -9152,7 +9140,6 @@ var APP_com_domain_app_lightningworkshop = (function () {
     fetchNext() {
       Api._getMovies(this.pageFetched + 1).then(movieList => {
         this.tag("Category").text = movieList.page.title;
-        console.log(movieList);
         this.totalCount = Number(movieList["page"]["total-content-items"]);
         this.pageFetched += 1;
         this.tag("List").add(movieList["page"]["content-items"]["content"].map(item => {
@@ -9175,7 +9162,7 @@ var APP_com_domain_app_lightningworkshop = (function () {
     static getFonts() {
       return [{
         family: "Regular",
-        url: Utils.asset("fonts/Roboto-Regular.ttf")
+        url: Utils.asset("fonts/TitilliumWeb-Regular.ttf")
       }];
     }
     static _template() {
