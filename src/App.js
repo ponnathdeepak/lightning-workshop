@@ -4,7 +4,7 @@ import List from "./List";
 export default class App extends Lightning.Component {
   static getFonts() {
     return [
-      { family: "Regular", url: Utils.asset("fonts/Roboto-Regular.ttf") },
+      { family: "Regular", url: Utils.asset("fonts/TitilliumWeb-Regular.ttf") },
     ];
   }
 

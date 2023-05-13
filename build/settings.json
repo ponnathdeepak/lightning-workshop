@@ -10,7 +10,6 @@
   },
   "platformSettings": {
     "path": "./static",
-    "precision":0.66,
     "log": true
   }
 }

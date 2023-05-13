@@ -5,13 +5,19 @@
 ### Getting started
 
 > Before you follow the steps below, make sure you have the
-[Lightning-CLI](https://rdkcentral.github.io/Lightning-CLI/#/) installed _globally_ only your system
+> [Lightning-CLI](https://rdkcentral.github.io/Lightning-CLI/#/) installed _globally_ only your system
 
 ```
 npm install -g @lightningjs/cli
 ```
 
 #### Running the App
+
+1. Install http-server
+2. Fire a local server from the build folder
+   http-server ./build -p 8080
+
+#### Running the App(Development purpose)
 
 1. Install the NPM dependencies by running `npm install`
 
@@ -23,7 +29,7 @@ npm install -g @lightningjs/cli
 
 During development you can use the **watcher** functionality of the _Lightning-CLI_.
 
-- use `lng watch` to automatically _rebuild_ your App whenever you make a change in the `src` or  `static` folder
+- use `lng watch` to automatically _rebuild_ your App whenever you make a change in the `src` or `static` folder
 - use `lng dev` to start the watcher and run a local webserver / open the App in a browser _at the same time_
 
 #### Documentation
