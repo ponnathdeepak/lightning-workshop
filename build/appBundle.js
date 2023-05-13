@@ -3,7 +3,7 @@
  * SDK version: 5.3.2
  * CLI version: 2.11.0
  * 
- * Generated: Sat, 13 May 2023 15:19:12 GMT
+ * Generated: Sat, 13 May 2023 15:53:20 GMT
  */
 
 var APP_com_domain_app_lightningworkshop = (function () {
